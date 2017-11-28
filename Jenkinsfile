@@ -5,9 +5,14 @@ pipeline {
     stages {
         stage('build') {
 
+          when {
+            SOURCE_BRANCH "master"
+          }
+
           steps{
 
-                  sh "printenv"
+              sh 'printenv'
+
             }
           }
     }
