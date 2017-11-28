@@ -6,7 +6,9 @@ pipeline {
         stage('build') {
 
           when {
-            SOURCE_BRANCH "master"
+            expression {
+              return params.SOURCE_BRANCH=="master"
+            }
           }
 
           steps{
