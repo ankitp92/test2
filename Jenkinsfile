@@ -33,6 +33,7 @@ pipeline {
             }
 
           }
+      }
 
         post {
           success {
@@ -45,5 +46,5 @@ pipeline {
 
           }
 
-    }
+
 }
