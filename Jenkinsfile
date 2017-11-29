@@ -37,12 +37,13 @@ pipeline {
         post {
           success {
 
-              node('master') {
-                build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SOURCE_BRANCH', value: env.SOURCE_BRANCH]]
+                node('master') {
+                  build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SOURCE_BRANCH', value: env.SOURCE_BRANCH]]
+                }
+
               }
 
           }
 
     }
-
 }
