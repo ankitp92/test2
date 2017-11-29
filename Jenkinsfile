@@ -34,9 +34,9 @@ pipeline {
                 result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
                 echo "${result}"
                 if ( result!=0 ){
-                  env.SKIP_PnL="0"
+                  params.SKIP_PnL="0"
                 }else {
-                  env.SKIP_PnL="1"
+                  params.SKIP_PnL="1"
                 }
               }
             }
