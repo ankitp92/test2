@@ -12,11 +12,37 @@ pipeline {
           }
 
           steps{
+              script {
+                env.SOURCE_BRANCH="master"
+                sh 'printenv'
+              }
 
-              sh 'printenv'
 
             }
           }
+
+        stage('branch check') {
+            when {
+              branch "test"
+            }
+
+            steps {
+              script{
+                env.SOURCE_BRANCH="test"
+              }
+            }
+
+          }
+
+        post {
+          success {
+
+              node('master') {
+                build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SOURCE_BRANCH', value: env.SOURCE_BRANCH]]
+              }
+
+          }
+
     }
 
 }
