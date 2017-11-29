@@ -34,9 +34,9 @@ pipeline {
                 result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
                 echo "${result}"
                 if ( result!=0 ){
-                  params.SKIP_PnL="0"
+                  env.SKIP_PnL="0"
                 }else {
-                  params.SKIP_PnL="1"
+                  env.SKIP_PnL="1"
                 }
               }
             }
@@ -46,7 +46,11 @@ pipeline {
           stage('Assign Environment') {
             steps {
               script{
-                env.SKIP_PnL=params.SKIP_PnL
+                if(env.SKIP_PnL){
+                  echo "${SKIP_PnL}"
+                }else {
+                  env.SKIP_PnL="0"
+                }
               }
             }
           }
