@@ -22,13 +22,14 @@ pipeline {
           }
 
         stage('branch check') {
-            when {
-              branch "test"
-            }
+
 
             steps {
               script{
-                env.SOURCE_BRANCH="test"
+                if ( env.GIT_BRANCH=='origin/test' )
+                {
+                  env.SOURCE_BRANCH="test"
+                }
               }
             }
 
