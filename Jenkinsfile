@@ -21,7 +21,7 @@ pipeline {
             }
           }
 
-        stage('branch check') {
+        stage('JOB_TRIGGER Check') {
           when {
             expression {
               return params.JOB_TRIGGER=="0"
