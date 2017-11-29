@@ -43,7 +43,7 @@ pipeline {
 
           }
 
-          stage('Assign Environment') {
+          stage('Check NULL') {
             steps {
               script{
                 if(env.SKIP_PnL){
