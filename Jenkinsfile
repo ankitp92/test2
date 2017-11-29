@@ -48,7 +48,7 @@ pipeline {
           success {
 
                 node('master') {
-                  build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.SKIP_PnL]]
+                  build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: params.SKIP_PnL]]
                 }
 
               }
