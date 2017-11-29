@@ -42,13 +42,21 @@ pipeline {
             }
 
           }
+
+          stage('Assign Environment') {
+            steps {
+              script{
+                env.SKIP_PnL=params.SKIP_PnL
+              }
+            }
+          }
       }
 
         post {
           success {
 
                 node('master') {
-                  build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: params.SKIP_PnL]]
+                  build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: env.SKIP_PnL]]
                 }
 
               }
