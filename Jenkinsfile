@@ -8,7 +8,7 @@ pipeline {
         stage('JOB_TRIGGER Check') {
           when {
             expression {
-              return $JOB_TRIGGER=="0"
+              return ${JOB_TRIGGER}=="0"
             }
           }
 
