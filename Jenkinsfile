@@ -30,10 +30,11 @@ pipeline {
           stage('Check NULL') {
             steps {
               script{
-                if($SKIP_PnL){
+                if("${SKIP_PnL}"){
                   echo "${SKIP_PnL}"
                 }else {
                   SKIP_PnL="0"
+                  echo "${SKIP_PnL}"
                 }
               }
             }
@@ -44,7 +45,7 @@ pipeline {
           success {
 
                 node('master') {
-                  build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: $SKIP_PnL]]
+                  build job: 'test3', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: "${SKIP_PnL}"]]
                 }
 
               }
