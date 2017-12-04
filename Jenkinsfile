@@ -15,17 +15,15 @@ pipeline {
             steps {
               script {
                   echo "${SKIP_PnL}"
-                  try{
-                    echo "${JOB_TRIGGER}"
-                  }
-                  catch (e){
-                    sh 'printenv'
-                    result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
-                    echo "${result}"
-                    if ( result!=0 ){
-                      SKIP_PnL="0"
-                    }else {
-                      SKIP_PnL="1"
+                  if("${JOB_TRIGGER}"==0){
+                      sh 'printenv'
+                      result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
+                      echo "${result}"
+                      if ( result!=0 ){
+                        SKIP_PnL="0"
+                      }else {
+                        SKIP_PnL="1"
+                      }
                     }
                   }
 
