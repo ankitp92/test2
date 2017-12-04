@@ -6,14 +6,10 @@ pipeline {
 
 
         stage('JOB_TRIGGER Check') {
-          when {
-            expression {
-              return "${JOB_TRIGGER}"=="0"
-            }
-          }
 
             steps {
               script {
+                if(!"${JOB_TRIGGER}" || "${JOB_TRIGGER}"=="0")
                 sh 'printenv'
                 result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
                 echo "${result}"
