@@ -9,20 +9,21 @@ pipeline {
 
             steps {
               script {
-                if("${JOB_TRIGGER}"){
-                  echo "No need"
-                }else{
-                  sh 'printenv'
-                  result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
-                  echo "${result}"
-                  if ( result!=0 ){
-                    SKIP_PnL="0"
-                  }else {
-                    SKIP_PnL="1"
+                  try{
+                    echo "${JOB_TRIGGER}"
                   }
-                }
+                  catch (e){
+                    sh 'printenv'
+                    result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
+                    echo "${result}"
+                    if ( result!=0 ){
+                      SKIP_PnL="0"
+                    }else {
+                      SKIP_PnL="1"
+                    }
+                  }
 
-              }
+                }
             }
 
           }
