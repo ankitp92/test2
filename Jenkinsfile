@@ -14,7 +14,7 @@ pipeline {
 
             steps {
               script {
-                  echo "${SKIP_PnL}"
+                  echo "${JOB_TRIGGER}"
                   if("${JOB_TRIGGER}"==0){
                       sh 'printenv'
                       result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
@@ -33,11 +33,11 @@ pipeline {
           }
 
 
-      
+
 
         post {
           success {
-
+                echo "${SKIP_PnL}"
                 node('master') {
                   build job: '../test3/master', parameters: [[$class: 'StringParameterValue', name: 'SKIP_PnL', value: "${SKIP_PnL}"]]
                 }
