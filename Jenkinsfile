@@ -1,15 +1,10 @@
 pipeline {
     agent any
 
-    properties([
-      [$class: 'ParametersDefinitionProperty',
-        parameterDefinitions: [
-          [$class: 'StringParameterDefinition',
-            name: 'JOB_TRIGGER',
-            defaultValue: '0',
-            description: 'A test parameter']]
-      ]
-    ])
+    parameters {
+      string( defaultValue:'0', description:'', name:'JOB_TRIGGER')
+      string( defaultValue:'0', description:'', name:'SKIP_PnL')
+    }
 
 
     stages {
