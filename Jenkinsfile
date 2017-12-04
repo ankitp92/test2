@@ -15,7 +15,7 @@ pipeline {
             steps {
               script {
                   echo "${JOB_TRIGGER}"
-                  if("${JOB_TRIGGER}"==0){
+                  if("${JOB_TRIGGER}"=="0"){
                       sh 'printenv'
                       result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
                       echo "${result}"
