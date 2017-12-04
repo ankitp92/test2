@@ -9,7 +9,7 @@ pipeline {
 
             steps {
               script {
-                if("${JOB_TRIGGER}" && "${JOB_TRIGGER}"=="1"){
+                if("${JOB_TRIGGER}"){
                   echo "No need"
                 }else{
                   sh 'printenv'
