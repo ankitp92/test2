@@ -14,6 +14,7 @@ pipeline {
 
             steps {
               script {
+                  echo "${SKIP_PnL}"
                   try{
                     echo "${JOB_TRIGGER}"
                   }
