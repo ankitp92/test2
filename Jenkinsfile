@@ -9,15 +9,19 @@ pipeline {
 
             steps {
               script {
-                if(!"${JOB_TRIGGER}" || "${JOB_TRIGGER}"=="0")
-                sh 'printenv'
-                result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
-                echo "${result}"
-                if ( result!=0 ){
-                  SKIP_PnL="0"
-                }else {
-                  SKIP_PnL="1"
+                if("${JOB_TRIGGER}" && "${JOB_TRIGGER}"=="1"){
+                  echo "No need"
+                }else{
+                  sh 'printenv'
+                  result = sh (script: "git log -1 | grep '\\[pnl skip\\]'", returnStatus: true)
+                  echo "${result}"
+                  if ( result!=0 ){
+                    SKIP_PnL="0"
+                  }else {
+                    SKIP_PnL="1"
+                  }
                 }
+
               }
             }
 
