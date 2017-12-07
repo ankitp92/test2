@@ -1,2 +1,7 @@
-# test2
-This is test readme
+[
+		{
+			"name":"basetrade",
+			"bucket":"dvc-artifactory",
+			"key":"basetrade1"
+		}
+]
